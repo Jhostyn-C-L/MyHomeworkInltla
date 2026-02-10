@@ -1,4 +1,4 @@
-﻿Console.WriteLine("Please, write a number");
+﻿Console.WriteLine("Please enter a number to check if it is even or odd.");
 int number = Convert.ToInt32(Console.ReadLine());
 if (number % 2 == 0)
 {
