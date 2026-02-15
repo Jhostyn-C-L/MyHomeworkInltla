@@ -1,10 +1,27 @@
 ﻿Console.WriteLine("Please enter a number to check if it is even or odd.");
-int number = Convert.ToInt32(Console.ReadLine());
-if (number % 2 == 0)
+while (true)
 {
-    Console.WriteLine("It is even");
-}   else
-{
-    Console.WriteLine("It is odd");
+    try
+    {
+        double number = Convert.ToDouble(Console.ReadLine());
+        if (number % 2 == 0)
+        {
+            Console.WriteLine("It is even");
+        }
+        else
+        {
+            Console.WriteLine("It is odd");
+        }
+        break;
+    }
+    catch (FormatException)
+    { Console.WriteLine("That is not number valid, please try again"); }
+    catch (OverflowException)
+    {
+        Console.WriteLine("Sorry, that number is very long, try again");
+    } 
+    catch (Exception ex) 
+    { Console.WriteLine("Oh, apparently, an unexpected error has occurred." + ex.Message); }
 }
-Console.WriteLine(number);
+
+
