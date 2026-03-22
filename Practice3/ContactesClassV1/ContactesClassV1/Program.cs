@@ -1,4 +1,5 @@
-﻿Console.WriteLine("Welcome to my List of Contact");
+﻿
+Console.WriteLine("Welcome to my List of Contact");
 Console.WriteLine("This work for add and manage your list of contacts");
 
 //names, lastnames, addresses, telephones, emails, ages, bestfriend
@@ -56,13 +57,17 @@ while (runing)
                 runing = false;
                 break;
             default:
-                Console.WriteLine("Why do you choose this number? It is not valid.");// or Invalid option, please try again
+                Console.WriteLine("Why do you choose this number? It is not valid.");// or Invalid option, please try again? probably
                 break;
         }
     }
     catch (FormatException)
     {
         Console.WriteLine("An unexpected error has occurred");
+    }
+    catch (KeyNotFoundException)
+    {
+        Console.WriteLine("Error: Contact not found.");
     }
     catch (Exception ex)
     {
