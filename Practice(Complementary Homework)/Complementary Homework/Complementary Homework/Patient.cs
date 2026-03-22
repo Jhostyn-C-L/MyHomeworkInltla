@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Complementary_Homework
 {
-    internal class Patient
+    public class Patient
     {
+        public int Id;
+        public string Name;
+        public string Age;
+        public string Diagnosis;
+        public string Address;
     }
+
 }
