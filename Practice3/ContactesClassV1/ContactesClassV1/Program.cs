@@ -75,8 +75,6 @@ while (runing)
     }
 }
 
-
-
 static void AddContact(List<int> ids, Dictionary<int, string> names, Dictionary<int, string> lastnames, Dictionary<int, string> addresses, Dictionary<int, string> telephones, Dictionary<int, string> emails, Dictionary<int, int> ages, Dictionary<int, bool> bestFriends)
 {
     string name;
@@ -240,7 +238,7 @@ static void AddContact(List<int> ids, Dictionary<int, string> names, Dictionary<
     }
     static void DeleteContact(List<int> ids, Dictionary<int, string> names, Dictionary<int, string> lastnames, Dictionary<int, string> addresses, Dictionary<int, string> telephones, Dictionary<int, string> emails, Dictionary<int, int> ages, Dictionary<int, bool> bestFriends)
     {
-        Console.WriteLine("Digite Id to delete");
+        Console.WriteLine("Enter Id to delete");
 
         if (!int.TryParse(Console.ReadLine(), out int id) || !ids.Contains(id))
         {
