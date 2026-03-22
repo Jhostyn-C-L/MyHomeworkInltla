@@ -45,7 +45,9 @@ class Program
                         break;
                     case 6:
                         running = false;
+                        Console.WriteLine("Thank you for whatching.");
                         break;
+                        
                     default:
                         Console.WriteLine("Invalid option");
                         break;
