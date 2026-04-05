@@ -8,12 +8,6 @@ namespace Complementary_homework
 {
     public static class PatientService
     {
-        static bool IsBloodTypeValid(string blood)
-        {
-            string[] validTypes = { "O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-" };
-            return validTypes.Contains(blood.ToUpper());
-        }
-
         public static void AddPatient(List<Patient> patients)
         {
             string name;
@@ -21,7 +15,7 @@ namespace Complementary_homework
             {
                 Console.Write("Enter patient's Name: ");
                 name = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(name)) break;
+                if (ValidatorPatient.IsNameValid(name)) break;
                 Console.WriteLine("Name cannot be empty.");
             }
             string age;
@@ -33,11 +27,7 @@ namespace Complementary_homework
                 {
                     Console.WriteLine("Age cannot be empty.");
                 }
-                else if (!int.TryParse(age, out int ageValue))
-                {
-                    Console.WriteLine("Age must be numeric.");
-                }
-                else if (ageValue <= 0 || ageValue >= 120)
+                else if (!ValidatorPatient.IsAgeValid(age, out int ageValue))
                 {
                     Console.WriteLine("Usually the age must be between 1 and 119.");
                 }
@@ -51,16 +41,15 @@ namespace Complementary_homework
             {
                 Console.Write("Enter patient's diagnosis: ");
                 diagnosis = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(diagnosis)) break;
+                if (ValidatorPatient.IsDiagnosisValid(diagnosis)) break;
                 Console.WriteLine("Diagnosis cannot be empty.");
             }
-
             string address;
             while (true)
             {
                 Console.Write("Enter patient's address: ");
                 address = Console.ReadLine();
-                if (!string.IsNullOrWhiteSpace(address)) break;
+                if (ValidatorPatient.IsAddressValid(address)) break;
                 Console.WriteLine("Address cannot be empty.");
             }
             string bloodType;
@@ -76,7 +65,7 @@ namespace Complementary_homework
                 {
                     Console.WriteLine("Blood type cannot be empty.");
                 }
-                else if (!IsBloodTypeValid(bloodType))
+                else if (!ValidatorPatient.IsBloodTypeValid(bloodType))
                 {
                     Console.WriteLine("An invalid blood type has been entered... remember, the valid types are:");
                     Console.WriteLine("O+, O-, A+, A-, B+, B-, AB+ or AB-");
@@ -201,7 +190,7 @@ namespace Complementary_homework
                 {
                     Console.WriteLine("New name:");
                     string newname = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(newname))
+                    if (!ValidatorPatient.IsNameValid(newname))
                     {
                         Console.WriteLine("Name cannot be empty...");
                     }
@@ -233,18 +222,13 @@ namespace Complementary_homework
                 {
                     Console.WriteLine("New age:");
                     string age = Console.ReadLine();
-
                     if (string.IsNullOrWhiteSpace(age))
                     {
-                        Console.WriteLine("Age cannot be empty...");
+                        Console.WriteLine("Age cannot be empty.");
                     }
-                    else if (!int.TryParse(age, out int ageValue))
+                    else if(!ValidatorPatient.IsAgeValid(age, out int ageValue))
                     {
-                        Console.WriteLine("Age must be numeric.");
-                    }
-                    else if (ageValue <= 0 || ageValue >= 120)
-                    {
-                        Console.WriteLine("Age must be between 1 and 119.");
+                        Console.WriteLine("Usually the age must be between 1 and 119...");
                     }
                     else
                     {
@@ -274,7 +258,7 @@ namespace Complementary_homework
                     Console.WriteLine("New diagnosis:");
                     string diagnosis = Console.ReadLine();
 
-                    if (string.IsNullOrWhiteSpace(diagnosis))
+                    if (!ValidatorPatient.IsDiagnosisValid(diagnosis))
                     {
                         Console.WriteLine("Diagnosis cannot be empty.");
                     }
@@ -307,7 +291,7 @@ namespace Complementary_homework
 
                     Console.WriteLine("New address:");
                     string address = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(address))
+                    if (!ValidatorPatient.IsAddressValid(address))
                     {
                         Console.WriteLine("Address cannot be empty.");
                     }
@@ -331,6 +315,5 @@ namespace Complementary_homework
             Console.WriteLine("Patient updated");
             Console.WriteLine($"just in case, remember, blood type cannot be modified, current value: {patient.BloodType}");
         }
-
     }
 }
