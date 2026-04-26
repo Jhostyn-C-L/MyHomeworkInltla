@@ -10,6 +10,6 @@ namespace StudentAttendance
     public static class DatabaseConnections
     {
         public static string connectionString =
-            "Server=MSI\\SQLEXPRESS01;Database=StudentAttendacedb;Trusted_Connection=True";
+            "Server=MSI\\SQLEXPRESS01;Database=StudentAttendancedb;Trusted_Connection=True";
     }
 }

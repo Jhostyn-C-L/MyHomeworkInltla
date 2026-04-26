@@ -11,10 +11,34 @@ namespace StudentAttendance
     {
         public static void AddStudent()
         {
-            Console.WriteLine("Enter First Name ");
-            string firstName = Console.ReadLine();
-            Console.WriteLine("Enter Last Name ");
-            string lastName = Console.ReadLine();
+            string firstName;
+            while (true)
+            {
+                Console.WriteLine("Enter First Name ");
+                firstName = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(firstName))
+                {
+                    Console.WriteLine("First Name cannot be empty.");
+                }
+                else
+                {
+                    break;
+                }
+            }
+            string lastName;
+            while (true)
+            {
+                Console.WriteLine("Enter Last Name ");
+                lastName = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(lastName))
+                {
+                    Console.WriteLine("Last Name cannot be empty.");
+                }
+                else
+                {
+                    break;
+                }
+            }
             using (SqlConnection connection = new SqlConnection(DatabaseConnections.connectionString))
             {
                 connection.Open();
@@ -69,6 +93,23 @@ namespace StudentAttendance
                 }
             }
         }
+        private static bool Askyesorno(string message)
+        {
+            while (true)
+            {
+                Console.WriteLine(message + " (Yes/No):");
+                string input = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(input))
+                {
+                    Console.WriteLine("Please, you must enter Yes or No.");
+                    continue;
+                }
+                if (input.Equals("Yes", StringComparison.OrdinalIgnoreCase))
+                    return true;
+                if (input.Equals("No", StringComparison.OrdinalIgnoreCase))
+                    return false;
+            }
+        }
         public static void EditStudent()
         {
             Console.Write("Enter student ID to edit: ");
@@ -95,24 +136,29 @@ namespace StudentAttendance
                 string currentFirstname = reader["FirstName"].ToString();
                 string currentLastname = reader["LastName"].ToString();
                 reader.Close();
-                Console.WriteLine($"Current FIrst Name: {currentFirstname}");
-                Console.WriteLine("Do you want to modify it? (Yes/No): ");
-                string option = Console.ReadLine();
                 string newFirstName = currentFirstname;
-                if (option.Equals("Yes", StringComparison.OrdinalIgnoreCase))
+                string newLastName = currentLastname;
+                Console.WriteLine($"Current FIrst Name: {currentFirstname}");
+                //string newFirstName = currentFirstname;
+
+                if (Askyesorno("Do you want to modify it?"))
                 {
                     while (true)
                     {
                         Console.Write("Enter new first name: ");
-                        newFirstName = Console.ReadLine();
+                        string input = Console.ReadLine();
                         if (string.IsNullOrWhiteSpace(newFirstName))
                         {
                             Console.WriteLine("First name cannot be empty.");
                         }
-                        else break;
+                        else
+                        {
+                            newFirstName = input;
+                            break;
+                        }
                     }
                 }
-                Console.WriteLine($"Current Last Name: {currentLastname}");
+                /*
                 Console.WriteLine("Do you want to modify it? (Yes/No): ");
                 option = Console.ReadLine();
                 string newLastName = currentLastname;
@@ -127,6 +173,24 @@ namespace StudentAttendance
                             Console.WriteLine("Last name cannot be empty.");
                         }
                         else break;
+                    }
+                }*/
+                Console.WriteLine($"Current Last Name: {currentLastname}");
+                if (Askyesorno("Do you want to modify it?"))
+                {
+                    while (true)
+                    {
+                        Console.Write("Enter new last name: ");
+                        string input = Console.ReadLine();
+                        if (string.IsNullOrWhiteSpace(input))
+                        {
+                            Console.WriteLine("Last name cannot be empty.");
+                        }
+                        else
+                        {
+                            newLastName = input;
+                            break;
+                        }
                     }
                 }
                 string updatequery = @"UPDATE Students SET FirstName = @FirstName, LastName = @LastName

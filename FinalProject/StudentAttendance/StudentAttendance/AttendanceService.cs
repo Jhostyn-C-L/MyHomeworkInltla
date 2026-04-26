@@ -12,11 +12,30 @@ namespace StudentAttendance
         public static void MarkAttendance()
         {
             Console.Write("Enter Student Id: ");
-            int studentid = int.Parse(Console.ReadLine());
-            Console.Write("Enter status(Present/Absent):");
-            string status = Console.ReadLine();
+            if (!int.TryParse(Console.ReadLine(), out int studentid))
+            {
+                Console.WriteLine("Invalid Id.");
+                return;
+            }
+            string status;
+            while (true)
+            {
+                Console.Write("Enter status(Present/Absent):");
+                status = Console.ReadLine();
+                if (status.Equals("Present", StringComparison.OrdinalIgnoreCase) ||
+                    status.Equals("Absent", StringComparison.OrdinalIgnoreCase))
+                {
+                    status = char.ToUpper(status[0]) + status.Substring(1).ToLower();
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Invalid status. Please just enter 'Present' or 'Absent'.");
+                }
+            }
+            
             DateTime date = DateTime.Now.Date;
-
+            
             using (SqlConnection connection = new SqlConnection(DatabaseConnections.connectionString))
             {
                 connection.Open();
