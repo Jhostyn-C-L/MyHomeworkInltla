@@ -147,7 +147,7 @@ namespace StudentAttendance
                     {
                         Console.Write("Enter new first name: ");
                         string input = Console.ReadLine();
-                        if (string.IsNullOrWhiteSpace(newFirstName))
+                        if (string.IsNullOrWhiteSpace(input))
                         {
                             Console.WriteLine("First name cannot be empty.");
                         }
